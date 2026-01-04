@@ -1,15 +1,14 @@
 #ifndef STRUCTURE_H
 #define STRUCTURE_H
 #include"linhkien.h"
-typedef  int (*STRING_HASH_FUNC)(string& key, int size);
+typedef  int (*STRING_HASH_FUNC)(std::string &key, int size);
 
 
 
  struct LlistNode {
-    LinhKien data;
+    LinhKien *data;
     struct LlistNode* next;
 };
-typedef struct LlistNode LlistNode;
 
 class Llist{
     LlistNode* head;
@@ -20,9 +19,9 @@ Llist(){
     size=0;
 }
 void initList(LlistNode* hed);
-void insertAtEnd( LinhKien lk);
-void insertAtBeginning(LinhKien lk);
-void deleteNode(LinhKien lk);
+void insertAtEnd( LinhKien *lk);
+void insertAtBeginning(LinhKien *lk);
+void deleteNode(LinhKien *lk);
 void deleteList();
 void printList();
 LlistNode* getHead(){

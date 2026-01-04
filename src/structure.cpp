@@ -10,7 +10,7 @@ size=1;
     size++;
 }
 }
-void Llist::insertAtEnd(LinhKien lk)
+void Llist::insertAtEnd(LinhKien *lk)
 {
     LlistNode *newNode=new LlistNode;
     newNode->data=lk;
@@ -30,7 +30,7 @@ temp->next=newNode;
 }
 size++;
 }
-void Llist::insertAtBeginning( LinhKien lk) {
+void Llist::insertAtBeginning( LinhKien *lk) {
     LlistNode* newNode = new LlistNode;
     newNode->data = lk;
     newNode->next = head;
@@ -57,11 +57,11 @@ LlistNode* Llist:: getlast(){
     }
     return temp;
 }
-void Llist:: deleteNode(LinhKien lk){
+void Llist:: deleteNode(LinhKien *lk){
     if(head==nullptr) return;
     LlistNode* temp=head;
     LlistNode* prev=nullptr;
-    while(temp!=nullptr && temp->data.getMaLK()!=lk.getMaLK()){
+    while(temp!=nullptr && temp->data->getMaLK()!=lk->getMaLK()){
         prev=temp;
         temp=temp->next;
     }
@@ -76,9 +76,10 @@ void Llist:: deleteNode(LinhKien lk){
     size--;
 }
 void Llist:: printList(){
+    cout<<"Danh sach linh kien trong danh muc:"<<endl;
     LlistNode* temp=head;
     while(temp!=nullptr){
-        cout<<temp->data.getMaLK()<<" "<<temp->data.getTenLK()<<" "<<temp->data.getSoLuong()<<endl;
+        cout<<temp->data->getMaLK()<<" "<<temp->data->getTenLK()<<" "<<temp->data->getSoLuong()<<endl;
         temp=temp->next;
     }
 }
@@ -107,7 +108,11 @@ void STR_Map::initMap(int s, STRING_HASH_FUNC func){
 }
 void STR_Map::insert(string key, LinhKien* value){
     int index=hashFunc(key,size);
-    table[index].insertAtEnd(*value);
+    table[index].insertAtEnd(value);
+}
+Llist* STR_Map::search_key(string key){
+    int index=hashFunc(key,size);
+    return &table[index];
 }
 STR_Map::~STR_Map(){
     for(int i=0;i<size;i++){

@@ -9,6 +9,7 @@ class LinhKien {
     float gia;
     int soLuong;
     double thongso;
+    double giatri;
     bool trangthai;
     public:
     void nhap(string mlk,string tlk,string ncc,float g,int sl,float ts);
@@ -20,6 +21,7 @@ class LinhKien {
     void setThongSo(double ts);
     void setSoLuong(int sl);
     void setTrangThai(bool tt);
+    void setGiaTri(double gt);
     string getNhaCungCap();
    string getMaLK();
     string getTenLK();
@@ -27,6 +29,7 @@ class LinhKien {
     float getThongSo();
     int getSoLuong();
     bool getTrangThai();
-    float getGiaTri();
+   
+    double getGiatri();
 };
 #endif // LINHKIEN_H

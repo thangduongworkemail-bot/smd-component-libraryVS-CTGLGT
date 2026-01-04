@@ -27,30 +27,36 @@ while(wbs.cell("F" + std::to_string(i)).value().type() != XLValueType::Empty) {
 }
    doc.close();
 }
+ STR_Map map_linhkien(100,djb2Hash);
+    STR_Map map_maLK(600,djb2Hash);
+LinhKien lk[5000];
+int sizelk=0;
 void luutru_linhkien(){
-    STR_Map map_linhkien(100,djb2Hash);
     XLDocument doc;
+ 
     doc.open("../data/linhkien.xlsx");
     auto wbs=doc.workbook().worksheet("Sheet1");
+    
     int i=2;
     cout<<"-----------------Hash Table Linh Kien-----------------"<<endl;
     while(wbs.cell("A" + std::to_string(i)).value().type() != XLValueType::Empty) 
     {
-        LinhKien lk;
-        lk.setTenLK(wbs.cell("A" + std::to_string(i)).value());
-        lk.setMaLK(wbs.cell("B" + std::to_string(i)).value());
-        lk.setSoLuong((wbs.cell("C" + std::to_string(i)).value()));
-        if(lk.getSoLuong()>0) lk.setTrangThai(true);
-        lk.setThongSo((wbs.cell("E" + std::to_string(i)).value()));
-        lk.setNhaCungCap(wbs.cell("F" + std::to_string(i)).value());
-        map_linhkien.insert(lk.getMaLK(),&lk);
+        
+        lk[sizelk].setTenLK(wbs.cell("A" + std::to_string(i)).value());
+        lk[sizelk].setMaLK(wbs.cell("B" + std::to_string(i)).value());
+        lk[sizelk].setSoLuong((wbs.cell("C" + std::to_string(i)).value()));
+        if(lk[sizelk].getSoLuong()>0) lk[sizelk].setTrangThai(true);
+        lk[sizelk].setThongSo((wbs.cell("E" + std::to_string(i)).value()));
+        lk[sizelk].setNhaCungCap(wbs.cell("F" + std::to_string(i)).value());
+
+
+        
+        map_linhkien.insert(lk[sizelk].getTenLK(),&lk[sizelk]);
+        map_maLK.insert(lk[sizelk].getMaLK(),&lk[sizelk]);
+        sizelk++;
         i++;
     }
-     for(int j=0;j<map_linhkien.size;j++){
-        cout<<"Bucket "<<j<<": ";
-        map_linhkien.table[j].printList();
-    }
-    
+    doc.close();
 }
 
 

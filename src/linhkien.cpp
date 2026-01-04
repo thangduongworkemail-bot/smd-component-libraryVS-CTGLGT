@@ -70,6 +70,6 @@ int LinhKien::getSoLuong(){
 bool LinhKien::getTrangThai(){
     return trangthai;
 }
-float LinhKien::getGiaTri(){
-    return gia*soLuong;
+double LinhKien::getGiatri(){
+    return giatri;
 }
