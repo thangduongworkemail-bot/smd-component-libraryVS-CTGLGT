@@ -1,36 +1,39 @@
 #include"../include/structure.h"
 
 void Llist::initList(LlistNode* hed){ 
-    if(hed==nullptr){
+    
     head = hed;
-size=1;
-    }
-    else{
-    insertAtEnd(hed->data);
-    size++;
+    if (head == nullptr) {
+        size = 0;
+    } else {
+        size = 1;
+        LlistNode* temp = head;
+        while (temp->next != nullptr) {
+            size++;
+            temp = temp->next;
+        }
 }
 }
-void Llist::insertAtEnd(LinhKien *lk)
+void Llist::insertAtEnd(LinhKien lk)
 {
     LlistNode *newNode=new LlistNode;
     newNode->data=lk;
     newNode->next=nullptr;
     if(head==nullptr)
-    {
-        head=newNode;
-        return;
-    }
-    else{
-        LlistNode *temp=head;
-while(temp->next!=nullptr)
 {
-    temp=temp->next;
+    head=newNode;
 }
-temp->next=newNode;
+else{
+    LlistNode *temp=head;
+    while(temp->next!=nullptr)
+    {
+        temp=temp->next;
+    }
+    temp->next=newNode;
 }
 size++;
 }
-void Llist::insertAtBeginning( LinhKien *lk) {
+void Llist::insertAtBeginning( LinhKien lk) {
     LlistNode* newNode = new LlistNode;
     newNode->data = lk;
     newNode->next = head;
@@ -57,11 +60,11 @@ LlistNode* Llist:: getlast(){
     }
     return temp;
 }
-void Llist:: deleteNode(LinhKien *lk){
+void Llist:: deleteNode(LinhKien lk){
     if(head==nullptr) return;
     LlistNode* temp=head;
     LlistNode* prev=nullptr;
-    while(temp!=nullptr && temp->data->getMaLK()!=lk->getMaLK()){
+    while(temp!=nullptr && temp->data.getMaLK()!=lk.getMaLK()){
         prev=temp;
         temp=temp->next;
     }
@@ -75,24 +78,35 @@ void Llist:: deleteNode(LinhKien *lk){
     delete temp;
     size--;
 }
+
 void Llist:: printList(){
     cout<<"Danh sach linh kien trong danh muc:"<<endl;
     LlistNode* temp=head;
     while(temp!=nullptr){
-        cout<<temp->data->getMaLK()<<" "<<temp->data->getTenLK()<<" "<<temp->data->getSoLuong()<<endl;
-        temp=temp->next;
+        
+       
+    cout<<"Ten linh kien: "<<temp->data.getTenLK()<<endl;
+    cout<<"Ma linh kien: "<<temp->data.getMaLK()<<endl;
+    cout<<"So luong: "<<temp->data.getSoLuong()<<endl;
+    cout<<"Trang thai: "<<(temp->data.getTrangThai() ? "Con hang" : "Het hang")<<endl;
+    cout<<"Thong so: "<<temp->data.getThongSo()<<" "<<temp->data.getGiatri()<<endl;
+    cout<<"Nha cung cap: "<<temp->data.getNhaCungCap()<<endl;
+    temp=temp->next;
+    cout<<"-------------------------------------"<<endl;
     }
 }
  int djb2Hash( std::string& key, int size){
-     int hash = 5381;
+     unsigned  long hash = 5381;
     for (char c : key) {
         hash = ((hash << 5) + hash) + c; // hash * 33 + c
     }
+
     return hash % size;
 }
 STR_Map::STR_Map(int s, STRING_HASH_FUNC func)
     : size(s), hashFunc(func)
 {
+    sl=0;
     table = new Llist[size];
      for(int i=0;i<size;i++){
         table[i]=Llist();
@@ -101,20 +115,36 @@ STR_Map::STR_Map(int s, STRING_HASH_FUNC func)
 void STR_Map::initMap(int s, STRING_HASH_FUNC func){
     size=s;
     hashFunc=func;
+    sl=0;
     table=new Llist[size];
     for(int i=0;i<size;i++){
         table[i]=Llist();
     }
 }
-void STR_Map::insert(string key, LinhKien* value){
+void STR_Map::insert(string key, LinhKien value){
     int index=hashFunc(key,size);
-    table[index].insertAtEnd(value);
+    
+    LlistNode* temp=table[index].getHead();
+    while (temp!=nullptr)
+    {
+        if (temp->data.getMaLK() == value.getMaLK()) {
+            // Cập nhật giá trị nếu khóa đã tồn tại
+            cout<<"Chu Y!Da ton tai ma linh kien "<<value.getMaLK()<<", cap nhat thong tin!"<<endl;
+             sl++;
+            temp->data = value;
+            return;
+        }
+        temp=temp->next;
+    }
+     sl++;
+    table[index].insertAtBeginning(value);
+      
 }
 Llist* STR_Map::search_key(string key){
     int index=hashFunc(key,size);
     return &table[index];
 }
-STR_Map::~STR_Map(){
+void STR_Map::deletemap(){
     for(int i=0;i<size;i++){
         table[i].deleteList();
     }

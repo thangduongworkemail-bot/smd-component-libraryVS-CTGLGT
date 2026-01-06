@@ -1,7 +1,7 @@
 #include<iostream>
 #include<cstring>
 #include"../include/linhkien.h"
-void LinhKien::nhap(string mlk,string tlk,string ncc,float g,int sl,float ts){
+void LinhKien::nhap(string mlk,string tlk,string ncc,float g,double sl,double ts){
     maLK=mlk;
     tenLK=tlk;
     nhacungcap=ncc;
@@ -37,7 +37,7 @@ void LinhKien::setNhaCungCap(std::string ncc){
 void LinhKien::setGia(float g){
     gia=g;
 }
-void LinhKien::setSoLuong(int sl){
+void LinhKien::setSoLuong(double sl){
     soLuong=sl;
     if(soLuong>0) trangthai=true;
     else
@@ -48,6 +48,9 @@ void LinhKien::setThongSo(double ts){
 }
 void LinhKien::setTrangThai(bool tt){
     trangthai=tt;
+}
+void LinhKien::setGiaTri(string gt){
+    giatri=gt;
 }
 string LinhKien::getNhaCungCap(){
     return nhacungcap;
@@ -61,15 +64,15 @@ string LinhKien::getTenLK(){
 float LinhKien::getGia(){
     return gia;
 }
-float LinhKien::getThongSo(){
+double LinhKien::getThongSo(){
     return thongso;
 }
-int LinhKien::getSoLuong(){
+double LinhKien::getSoLuong(){
     return soLuong;
 }
 bool LinhKien::getTrangThai(){
     return trangthai;
 }
-double LinhKien::getGiatri(){
+string LinhKien::getGiatri(){
     return giatri;
 }

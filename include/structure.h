@@ -6,7 +6,7 @@ typedef  int (*STRING_HASH_FUNC)(std::string &key, int size);
 
 
  struct LlistNode {
-    LinhKien *data;
+    LinhKien data;
     struct LlistNode* next;
 };
 
@@ -19,9 +19,9 @@ Llist(){
     size=0;
 }
 void initList(LlistNode* hed);
-void insertAtEnd( LinhKien *lk);
-void insertAtBeginning(LinhKien *lk);
-void deleteNode(LinhKien *lk);
+void insertAtEnd( LinhKien lk);
+void insertAtBeginning(LinhKien lk);
+void deleteNode(LinhKien lk);
 void deleteList();
 void printList();
 LlistNode* getHead(){
@@ -32,17 +32,19 @@ LlistNode* getHead(){
 class STR_Map{
     public:
     int size;
+    int sl;
     STRING_HASH_FUNC hashFunc;
     Llist* table;
 
     STR_Map(int s, STRING_HASH_FUNC func);
     void initMap(int s, STRING_HASH_FUNC func);
-    void insert(string key, LinhKien* value);
+    void insert(string key, LinhKien value);
     Llist* search_key(string key);
     void remove(string key);
-  ~STR_Map();
+  void deletemap();
 };
 
  int djb2Hash( std::string& key, int size);
 
+ 
 #endif // STRUCTURE_H
