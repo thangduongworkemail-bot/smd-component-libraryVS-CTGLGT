@@ -5,7 +5,7 @@
 using namespace std;
 extern STR_Map map_linhkien;
     extern STR_Map map_maLK;
-extern LinhKien lk[5000];
+extern LinhKien mang_lk[5000];
 extern int sizelk;
 void menu();
 void option1();

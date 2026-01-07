@@ -30,24 +30,32 @@ void menu(){
         switch(k){
             case 1:
                 option1();
+                cout<<"Nhan phim bat ky de tiep tuc..."<<endl;
+               cin.ignore(1000, '\n');
+                 cin.ignore(1000, '\n');
                 displayMenu();
                 break;
             case 2:
                 option2();
                 cout<<"Nhan phim bat ky de tiep tuc..."<<endl;
-                cin.ignore();
+               cin.ignore(1000, '\n');
+                 cin.ignore(1000, '\n');
                 displayMenu();
                 break;
             case 3:
                 option3();
                 cout<<"Da luu linh kien ra file txt thanh cong!"<<endl;
                 cout<<" nhan phim bat ky de tiep tuc..."<<endl;
-                cin.ignore();
+                cin.ignore(1000, '\n');
+                  cin.ignore(1000, '\n');
                 displayMenu();
                 break;
             case 4:
-                //option4();
-                //displayMenu();
+                option4();
+                cout<<" nhan phim bat ky de tiep tuc..."<<endl;
+                cin.ignore(1000, '\n');
+                  cin.ignore(1000, '\n');
+                displayMenu();
                 break;
             case 5:
                 option5();
@@ -137,7 +145,131 @@ void option6(){
    void option3(){
    luu_LK_txt();
    }
-        
+   void option4(){
+     int temp=1;
+    while(temp){
+    string key;
+    cout << "Nhap tu khoa can tim: ";
+    cin.ignore(1000, '\n');
+getline(cin, key);
 
+
+int i = 0;
+    // Lấy phần số
+    while (i < key.size() && (isdigit(key[i]) || key[i] == '.'))
+        i++;
+
+    double value = stod(key.substr(0, i));
+string gt;
+    // Bỏ khoảng trắng
+    while (i < key.size() && key[i] == ' ')
+        i++;
+string unit = key.substr(i);
+    if (unit.find("p") == 0){  
+         gt =key.substr(i+1); // phần giá trị không có tiền tố
+;
+value= value * 1e-12;}
+    if (unit.find("n") == 0) {
+          gt =key.substr(i+1); // phần giá trị không có tiền tố
+;
+        value= value * 1e-9;}
+    if (unit.find("u") == 0 || unit.find("µ") == 0) 
+    { 
+          gt =key.substr(i+1); // phần giá trị không có tiền tố
+
+        value= value * 1e-6;}
+    else if (unit.find("m") == 0){
+         gt =key.substr(i+1); // phần giá trị không có tiền tố
+      
+        value= value * 1e-3;}
+   else  if (unit.find("k") == 0){ 
+         gt =key.substr(i+1); // phần giá trị không có tiền tố
+
+       value= value * 1e3;}
+    else if (unit.find("M") == 0) {
+         gt =key.substr(i+1); // phần giá trị không có tiền tố
+
+        value= value * 1e6;}
+    else if (unit.find("G") == 0) {
+         gt =key.substr(i+1); // phần giá trị không có tiền tố
     
-    
+       value= value * 1e9;}
+       else{
+   gt =key.substr(i); // phần giá trị không có tiền tố
+    value= value; // không có tiền tố
+    }
+    cout<<"GT :"<<gt;
+    if (gt=="Ohms"||gt=="F"||gt=="H"){
+    LinhKien searh[1000];
+ int j=0;
+    for (int i=0;i<sizelk;i++)
+    {
+  if(mang_lk[i].getGiatri()==gt){
+  searh[j]=mang_lk[i];
+  j++;
+  }
+
+    }
+    quickSort(searh,0,j);
+    for(int i=0;i<j;i++)
+    {
+        temp=0;
+        if(searh[i].getThongSo()==value)
+        {
+              cout << "Ten linh kien: " << searh[i].getTenLK() << endl;
+                cout << "Ma linh kien: " <<  searh[i].getMaLK() << endl;
+                cout << "So luong: " <<  searh[i].getSoLuong() << endl;
+                cout << "Trang thai: " <<  (searh[i].getTrangThai() ? "Con hang" : "Het hang") << endl;
+                cout << "Thong so: " << searh[i].getThongSo() << " " << searh[i].getGiatri() << endl;
+                cout << "Nha cung cap: " << searh[i].getNhaCungCap() << endl;
+                cout << "-------------------------------------" << endl;
+                temp=1;
+                break;
+        }
+        
+      else  if((searh[i-1].getThongSo()<value&&searh[i+1].getThongSo()>value))
+        {
+       cout << "Linh kien tim thay:\n";
+          cout << "Ten linh kien: " << searh[i-1].getTenLK() << endl;
+                cout << "Ma linh kien: " <<  searh[i-1].getMaLK() << endl;
+                cout << "So luong: " <<  searh[i-1].getSoLuong() << endl;
+                cout << "Trang thai: " <<  (searh[i-1].getTrangThai() ? "Con hang" : "Het hang") << endl;
+                cout << "Thong so: " << searh[i-1].getThongSo() << " " << searh[i-1].getGiatri() << endl;
+                cout << "Nha cung cap: " << searh[i-1].getNhaCungCap() << endl;
+                cout << "-------------------------------------" << endl;
+
+                cout << "Ten linh kien: " << searh[i].getTenLK() << endl;
+                cout << "Ma linh kien: " <<  searh[i].getMaLK() << endl;
+                cout << "So luong: " <<  searh[i].getSoLuong() << endl;
+                cout << "Trang thai: " << ( searh[i].getTrangThai() ? "Con hang" : "Het hang") << endl;
+                cout << "Thong so: " << searh[i].getThongSo() << " " << searh[i].getGiatri() << endl;
+                cout << "Nha cung cap: " << searh[i].getNhaCungCap() << endl;
+                cout << "-------------------------------------" << endl;
+
+      cout << "Ten linh kien: " << searh[i+1].getTenLK() << endl;
+                cout << "Ma linh kien: " <<  searh[i+1].getMaLK() << endl;
+                cout << "So luong: " <<  searh[i+1].getSoLuong() << endl;
+                cout << "Trang thai: " <<  (searh[i+1].getTrangThai() ? "Con hang" : "Het hang")<< endl;
+                cout << "Thong so: " << searh[i+1].getThongSo() << " " << searh[i].getGiatri() << endl;
+                cout << "Nha cung cap: " << searh[i+1].getNhaCungCap() << endl;
+                cout << "-------------------------------------" << endl;
+
+
+                temp=1;
+                break;
+        }
+    }
+    if (temp=0){
+        cout<<"khong tim thay lk\n";
+    }
+     cout<<"Nhan 1 de tiep tuc tim kiem, 0 de thoat chuc nang tim kiem!"<<endl;
+cin>>temp;
+}
+else {
+    cout<<"Nhap so lieu khong hop le\n";
+    cout<<"Nhan 1 de tiep tuc tim kiem, 0 de thoat chuc nang tim kiem!"<<endl;
+cin>>temp;
+}
+
+    }
+}

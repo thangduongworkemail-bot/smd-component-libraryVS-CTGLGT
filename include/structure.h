@@ -45,6 +45,6 @@ class STR_Map{
 };
 
  int djb2Hash( std::string& key, int size);
-
- 
+int partition(LinhKien a[], int low, int high);
+ void quickSort(LinhKien a[], int low, int high);
 #endif // STRUCTURE_H
