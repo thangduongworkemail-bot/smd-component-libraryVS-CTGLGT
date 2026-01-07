@@ -1,29 +1,33 @@
 Chương trình được xây dựng nhằm quản lý thư viện linh kiện điện tử (điện trở, tụ điện, cuộn cảm, jumper, …).
 Hệ thống cho phép lưu trữ, tìm kiếm, sắp xếp và xuất dữ liệu linh kiện phục vụ cho việc quản lý và tra cứu nhanh.
-
+nguồn: https://github.com/thangduongworkemail-bot/smd-component-libraryVS-CTGLGT.git
+có thể lấy trên git
 Chương trình được cài đặt bằng ngôn ngữ C++, sử dụng cấu trúc dữ liệu bảng băm (Hash Table) kết hợp danh sách liên kết để xử lý va chạm.
 
 2. Cấu trúc thư mục
 electronic_library/
 │
 ___src/
-│   ├── main.cpp              // Hàm main, menu chương trình
+│   ├
 │   ├── linhkien.cpp          // Cài đặt lớp LinhKien
-│   ├── hashtable.cpp         // Cài đặt bảng băm
-│   ├── linkedlist.cpp        // Danh sách liên kết
+│   ├── menu.cpp         // Cài đặt bảng băm
+│   ├── structure.cpp        // Danh sách liên kết
 │   └── io_linhkien.cpp       // Đọc / ghi dữ liệu
 │
 ├── include/
-│   ├── linhkien.h
-│   ├── hashtable.h
-│   └── linkedlist.h
-│
+│   ├── linhkien.h 
+│   ├── IO_linhkien.h
+│   |── structure.h
+│   |__menu.h
+|   
+|
+|
 ├── data/
 │   ├── INPUT/
 │   │   └── linhkien.xlsx     // Dữ liệu đầu vào dùng để thử nghiệm
 │   └── OUTPUT/
 │       └── linhkien.txt      // File xuất kết quả
-│
+│── main.cpp              // Hàm main, menu chương trình
 ├── CMakeLists.txt
 ├── README.txt
 └── build/main.exe
@@ -31,6 +35,8 @@ ___src/
 3. Dữ liệu sử dụng để thử nghiệm
 
 Dữ liệu linh kiện được lưu trong file Excel (.xlsx)
+lấy thông tin ở file linhkien copy để lấy dữ liệu test
+
 
 Mỗi linh kiện gồm các thông tin:
 
@@ -77,9 +83,6 @@ Tìm theo khoảng giá trị bằng:
 
 Sắp xếp trước
 
-Tìm kiếm nhị phân (lower_bound)
-
-Duyệt trong khoảng [min, max]
 
 5. Các chức năng chính
 
@@ -112,12 +115,12 @@ cmake --build .
 
 (hoặc main.exe trên Windows)
 
-7. Kết quả cho trường hợp đơn giản
+7. Kết quả cho trường hợp đơn giản(bổ xung trên báo cáo)
 
 Chương trình đọc thành công dữ liệu từ file Excel
 
 Thêm và lưu trữ linh kiện vào bảng băm
 
-Tìm kiếm nhanh theo mã và tên
+Tìm kiếm nhanh theo mã và tên 
 
 Xuất đầy đủ danh sách linh kiện ra file linhkien.txt
